@@ -4,6 +4,7 @@ import Register from "../components/Auth/Register";
 import Generator from "../components/Generator/Generator";
 import Home from "../components/Home/Home";
 import Main from "../layout/Main";
+import PrivetRoute from "../components/Auth/PrivetRoute";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/generator",
-        element: <Generator />,
+        element: (
+          <PrivetRoute>
+            <Generator></Generator>
+          </PrivetRoute>
+        ),
       },
     ],
   },
