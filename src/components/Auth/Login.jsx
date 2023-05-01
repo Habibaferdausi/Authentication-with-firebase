@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../Auth/AuthProvider";
 
 const Login = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+
+  const { setUser, login } = useContext(AuthContext);
 
   const handlePassword = (e) => {
     const passwordInput = e.target.value;
@@ -28,6 +31,11 @@ const Login = () => {
       toast.error(passwordError);
       return;
     }
+
+    login(email, password).then((result) => {
+      const user = result.user;
+      setUser(user);
+    });
   };
 
   const handleEmail = (e) => {
